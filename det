@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for file in "$@"
+do
+    file_bak="$file.txt"
+#    echo "$file"
+#    echo "$file_bak"
+    cat "$file" > "$file_bak"
+    mv "$file_bak" "$file"
+done
