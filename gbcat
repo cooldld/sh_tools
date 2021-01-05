@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for file in $@
+do
+    cat $file |iconv -f GBK -t UTF-8
+done
