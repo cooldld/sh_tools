@@ -1,0 +1,52 @@
+#! /bin/sh
+
+cipart_delete_all()
+{
+    svn cl --remove --cl cipart --depth=infinity .
+}
+
+cipart_delete_files()
+{
+    svn cl --remove --cl cipart --depth=files $@
+}
+
+cipart_add_all()
+{
+    for i in $(svn status -q | awk '{print $2}')
+    do
+        svn cl cipart $i
+    done
+}
+
+cipart_add_files()
+{
+    svn cl cipart $@
+}
+
+#main
+input_cmd=$1
+
+if [ $# -gt 0 ]
+then
+    shift 1
+    input_files=$@
+fi
+
+if [ x"$input_cmd" = x"clean" ]
+then
+    cipart_delete_all
+elif [ x"$input_cmd" = x"add" ] && [ -n "$input_files" ]
+then
+    cipart_delete_all
+    cipart_add_files $input_files
+elif [ x"$input_cmd" = x"delete" ] && [ -n "$input_files" ]
+then
+    cipart_delete_all
+    cipart_add_all
+    cipart_delete_files $input_files
+else
+    echo "help info"
+    echo "$0 clean"
+    echo "$0 add file1 file2 ..."
+    echo "$0 delete file1 file2 ..."
+fi
