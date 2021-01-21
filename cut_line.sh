@@ -21,7 +21,7 @@ if [ $end_line -gt $total_line ] || [ $end_line -le 0 ]
 then
     end_line=$total_line
 fi
-echo "end_line=$total_line"
+#echo "end_line=$total_line"
 
 if [ $start_line -gt $end_line ]
 then
