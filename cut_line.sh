@@ -21,11 +21,12 @@ if [ $end_line -gt $total_line ] || [ $end_line -le 0 ]
 then
     end_line=$total_line
 fi
-#echo "end_line=$total_line"
+
+echo "start_line=$start_line, end_line=$end_line, total_line=$total_line"
 
 if [ $start_line -gt $end_line ]
 then
-    echo "error, start_line=$start_line >= end_line=$end_line"
+    echo "error, start_line > end_line"
     exit 0
 fi
 
@@ -43,4 +44,5 @@ else
     rm -f $bak_file
 fi
 
-echo "ok"
+echo "ok, dest_file=$dest_file"
+exit 0
