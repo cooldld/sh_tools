@@ -33,8 +33,7 @@ then
     exit 0
 fi
 
-#bs=1 too slow, instead by ibs and obs
-dd if=$src_file of=$dest_file ibs=1 skip=$start_pos count=$data_len obs=2048
+dd if=$src_file of=$dest_file iflag=skip_bytes,count_bytes skip=$start_pos count=$data_len
 
 echo "ok, dest_file=$dest_file"
 exit 0
